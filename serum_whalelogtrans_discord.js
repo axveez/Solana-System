@@ -44,7 +44,7 @@ async function getTrade() {
         if(fill.size>=treshold){
           if(typeof(arr_donepost.find( (name) => name === `${fill.orderId}` )) === 'undefined'){
 
-            bigorder.push(`🔥  Big Trade Alert! someone BUYING ${fill.size} $TOKENNAME`); 
+            bigorder.push(`🔥   Big Trade Alert! someone has bought ${fill.size} $TOKENNAME @${fill.price}`); 
             arr_donepost.push(`${fill.orderId}`)
             console.log("POST") 
 
