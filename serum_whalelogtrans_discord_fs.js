@@ -49,7 +49,8 @@ async function getTrade() {
           if(orderarr.includes(`${fill.orderId}`)){
             // NOthing here
           }else{
-            bigorder.push(`🔥  Big Trade Alert! someone BUYING ${fill.size} $TOKENNAME`); 
+
+            bigorder.push(`🔥   Big Trade Alert! someone has bought ${fill.size} $TOKENNAME @${fill.price}`); 
             arr_donepost.push(`${fill.orderId}`)
             // console.log(`🔥  Big Trade Alert! someone BUYING ${fill.size} TOKENNAME`) 
             fs.appendFileSync(filename, `${fill.orderId}\n`);
