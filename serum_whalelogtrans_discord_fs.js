@@ -29,7 +29,7 @@ client.on('ready', async () => {
         // console.log(val)
         client.channels.cache.get(`${channelid}`).send(`${val}`)
     }
-  }, 5000);
+  }, 10000);
 
 
 
