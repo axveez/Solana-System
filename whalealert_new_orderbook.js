@@ -18,7 +18,7 @@ let marketAddress = new PublicKey('Market Addrees'); // MARKET
 let treshold = "500";
 let arr_donepost = Array();
 
-let filename = "orderbook.txt";
+let filename = "whalebuyorder.txt";
 
 client.on('ready', async () => {
   
@@ -37,23 +37,22 @@ client.on('ready', async () => {
 
 async function getTrade() {
     let market = await Market.load(connection, marketAddress, {}, programId);
-    let fills = await market.loadFills(connection);
+    let bids = await market.loadBids(connection);
     let bigorder = Array();
     let orderarr = await readfile();
 
 
     var count = 1;
-    for (let fill of fills) {
-      if(fill.side=="buy"){
-        if(fill.size>=treshold){
-          if(orderarr.includes(`${fill.orderId}`)){
+    for (let bid of bids) {
+      if(bid.side=="buy"){
+        if(bid.size>=treshold){
+          if(orderarr.includes(`${bid.orderId}`)){
             // NOthing here
           }else{
 
-            bigorder.push(`🔥   Big Trade Alert! someone has bought ${fill.size} $TOKENNAME @${fill.price}`); 
-            arr_donepost.push(`${fill.orderId}`)
-            // console.log(`🔥  Big Trade Alert! someone BUYING ${fill.size} TOKENNAME`) 
-            fs.appendFileSync(filename, `${fill.orderId}\n`);
+            bigorder.push(`🔥   Big Trade Alert! someone has bought ${bid.size} $TOKENNAME @${bid.price}`); 
+            arr_donepost.push(`${bid.orderId}`)
+            fs.appendFileSync(filename, `${bid.orderId}\n`);
           }
         }
       }
